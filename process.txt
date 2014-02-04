@@ -1,0 +1,24 @@
+1. Formed idea
+2. Use rails new
+3. Look at existing spreadsheet
+4. Think of classes required
+  - Envelope
+    * name
+    * type
+    * current_amount
+    * additional_amount
+    * new_amount
+    * denominations
+  - Denomination
+    * singular_name
+    * plural_name
+    * amount
+  - Twenty < Denomination
+  - Ten < Denomination
+  - Five < Denomination
+  - One < Denomination
+  - Budget
+    * date
+    * starting_amount
+    * envelopes
+    * remaining
