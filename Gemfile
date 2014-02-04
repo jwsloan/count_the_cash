@@ -8,6 +8,11 @@ group :development do
   gem 'sqlite3'
 end
 
+# from arubystory.blogspot.com
+gem 'haml'
+gem 'bootstrap-sass', '~> 2.3.2.0'
+gem 'simple_form'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
