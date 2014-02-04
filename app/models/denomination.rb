@@ -6,4 +6,8 @@ class Denomination < ActiveRecord::Base
   scope :fives, -> { where(singular_name: 'Five') } 
   scope :tens, -> { where(singular_name: 'Ten') }
   scope :twenties, -> { where(singular_name: 'Twenty') }
+
+  def plural_name
+    "#{singular_name}s"
+  end
 end

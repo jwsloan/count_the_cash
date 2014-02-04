@@ -1,1 +1,2 @@
 http://thibaultdenizet.com/tutorial/single-table-inheritance-with-rails-4-part-1/
+http://ruby.railstutorial.org/chapters/a-demo-app#sec-demo_user_has_many_microposts
