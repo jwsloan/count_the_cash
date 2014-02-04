@@ -1,0 +1,1 @@
+class Five < Denomination; end

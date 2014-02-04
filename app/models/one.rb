@@ -1,0 +1,1 @@
+class One < Denomination; end

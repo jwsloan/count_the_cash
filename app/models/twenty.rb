@@ -1,0 +1,1 @@
+class Twenty < Denomination; end
