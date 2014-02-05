@@ -1,0 +1,25 @@
+%h1 
+  Budget
+%p= "Created on: #{@budget.created_at}"
+%h1 Envelopes
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th Category
+      %th Name
+      %th Starting Amount
+      %th Additional Amount
+      %th new amount
+      -#TODO: Maybe use different table? Use children of denominations as header
+      %th ---------
+      %th Ones
+      %th Fives
+      %th Tens
+      %th Twenties
+    %tbody
+      - @envelopes.each do |envelope|
+        %tr
+          %td= envelope.category
+          %td= envelope.name
+          
+            

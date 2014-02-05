@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204054624) do
+ActiveRecord::Schema.define(version: 20140205030249) do
 
   create_table "budgets", force: true do |t|
     t.date     "date"
@@ -25,16 +25,22 @@ ActiveRecord::Schema.define(version: 20140204054624) do
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "envelope_id"
   end
+
+  add_index "denominations", ["envelope_id"], name: "index_denominations_on_envelope_id"
 
   create_table "envelopes", force: true do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "category"
     t.integer  "current_amount"
     t.integer  "additional_amount"
     t.integer  "new_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "budget_id"
   end
+
+  add_index "envelopes", ["budget_id"], name: "index_envelopes_on_budget_id"
 
 end
