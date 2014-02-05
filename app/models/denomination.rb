@@ -10,4 +10,8 @@ class Denomination < ActiveRecord::Base
   def plural_name
     "#{singular_name}s"
   end
+
+  before_save :default
+
+  def default;  end
 end
