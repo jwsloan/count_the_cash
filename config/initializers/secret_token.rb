@@ -9,4 +9,15 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-CountTheCash::Application.config.secret_key_base = '12a5e2809fea7109bc826ece4ea2706d973501e6e71b30e790ab90cb3dd1576668c02384862aa5c20ba567befbf5d9c3761875f7f930be897ad6670c5c277a7d'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    File.read(token_file).chomp
+  else
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+CountTheCash::Application.config.secret_key_base = secure_token
