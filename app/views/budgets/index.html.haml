@@ -17,9 +17,15 @@
       %th Tens
       %th Twenties
     %tbody
-      - @envelopes.each do |envelope|
+      - @budget.envelopes.each do |e|
         %tr
-          %td= envelope.category
-          %td= envelope.name
-          
-            
+          %td= e.category
+          %td= e.name
+          %td= e.current_amount
+          %td= e.additional_amount
+          %td= e.current_amount + e.additional_amount
+          %td |
+          %td= e.ones.count
+          %td= e.fives.count
+          %td= e.tens.count
+          %td= e.twenties.count  
