@@ -22,3 +22,6 @@
     * starting_amount
     * envelopes
     * remaining
+5. Could not get bootstrap or modal form working...
+  - haml tabs got me in trouble. Had includes inside title instead of header
+  - typo in jquery code did not grab modal

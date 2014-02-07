@@ -1,0 +1,9 @@
+.modal-header
+  %h1 New Envelope
+= simple_form_for envelope, class: 'clearfix' do |f|
+  .modal-body
+    = f.input :name
+    = f.input :current_amount
+    = f.input :additional_amount
+  .modal-footer
+    = f.submit 'Save', class: 'btn btn-primary'

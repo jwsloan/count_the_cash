@@ -1,6 +1,5 @@
 CountTheCash::Application.routes.draw do
-  root to: 'budgets#index'
-  resources :envelopes
-  resources :denominations
-  resources :budgets
+  root to: 'envelopes#show'
+  resources :envelopes, except: [:index]
+  resources :denominations, except: [:index]
 end

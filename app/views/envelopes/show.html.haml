@@ -1,0 +1,34 @@
+.container
+  - if @envelopes.empty?
+    %span.text-warning Start by creating your first envelope!
+  - else
+    %table.table.table-hover-table-bordered
+      %thead
+        %tr
+          %th 
+          %th Category
+          %th Name
+          %th Current Amount
+          %th Additional Amount
+          %th New Total
+          -#TODO: Maybe use different table? Use children of denominations as header
+          %th ---------
+          %th Twenties
+          %th Tens
+          %th Fives
+          %th Ones
+      %tbody
+        - @envelopes.each do |e|
+          %tr
+            %td= link_to 'Edit', edit_envelope_path(e)
+            %td= e.category
+            %td= e.name
+            %td= e.current_amount
+            %td= e.additional_amount
+            %td= e.current_amount + e.additional_amount
+            %td= '|'
+            %td= e.twenties.count
+            %td= e.tens.count
+            %td= e.fives.count
+            %td= e.ones.count
+#modal.modal.fade
