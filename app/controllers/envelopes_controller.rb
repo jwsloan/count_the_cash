@@ -9,6 +9,7 @@ class EnvelopesController < ApplicationController
 
   def create
     @envelope = Envelope.create(envelope_params)
+    @envelopes = Envelope.all
     #TODO: Do math do figure out denominations
     remaining = @envelope.additional_amount
     while remaining > 0 do
@@ -27,11 +28,10 @@ class EnvelopesController < ApplicationController
       end 
     end
     @envelope.save
-    redirect_to root_path
   end
 
   private
   def envelope_params
-    params.require(:envelope).permit(:name, :current_amount, :additional_amount)
+    params.require(:envelope).permit(:category, :name, :current_amount, :additional_amount)
   end
 end

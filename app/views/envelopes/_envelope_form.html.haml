@@ -1,7 +1,8 @@
 .modal-header
   %h1 New Envelope
-= simple_form_for envelope, class: 'clearfix' do |f|
+= simple_form_for envelope, class: 'clearfix', remote: true do |f|
   .modal-body
+    = f.input :category
     = f.input :name
     = f.input :current_amount
     = f.input :additional_amount
