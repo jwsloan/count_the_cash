@@ -1,5 +1,6 @@
 .modal-header
-  %h1 New Envelope
+  %h1 
+    = envelope.new_record? ? 'New Envelope' : "Edit '#{envelope.name}'"
 = simple_form_for envelope, class: 'clearfix', remote: true do |f|
   .modal-body
     = f.input :category

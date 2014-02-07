@@ -19,7 +19,9 @@
     %tbody
       - envelopes.each do |e|
         %tr
-          %td= link_to 'Edit', edit_envelope_path(e)
+          %td
+            = link_to edit_envelope_path(e), remote: true do
+              %i.icon-edit
           %td= e.category
           %td= e.name
           %td= e.current_amount
