@@ -11,6 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '2.13.1'
+  gem 'rubocop'
 end
 
 # from arubystory.blogspot.com
@@ -49,7 +50,8 @@ gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  # gem 'sdoc', require: false
+  gem 'yard'
 end
 
 group :production do

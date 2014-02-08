@@ -1,3 +1,4 @@
+# Initial envelope migration
 class CreateEnvelopes < ActiveRecord::Migration
   def change
     create_table :envelopes do |t|

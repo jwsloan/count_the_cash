@@ -1,3 +1,4 @@
+# Initial budget migration
 class CreateBudgets < ActiveRecord::Migration
   def change
     create_table :budgets do |t|

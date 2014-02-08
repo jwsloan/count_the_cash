@@ -1,3 +1,4 @@
+# Initial denomination migration
 class CreateDenominations < ActiveRecord::Migration
   def change
     create_table :denominations do |t|

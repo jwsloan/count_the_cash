@@ -1,3 +1,4 @@
+# Fix budget/envelope association
 class AddBudgetIdToEnvelopes < ActiveRecord::Migration
   def change
     add_column :envelopes, :budget_id, :integer
