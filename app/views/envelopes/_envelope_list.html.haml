@@ -28,11 +28,28 @@
               %i.icon-edit
           %td= e.category
           %td= e.name
-          %td= e.current_amount
-          %td= e.additional_amount
-          %td= e.current_amount + e.additional_amount
+          %td= "$#{e.current_amount}"
+          %td= "$#{e.additional_amount}"
+          %td= "$#{e.current_amount + e.additional_amount}"
           %td= '|'
           %td= e.twenties.count
           %td= e.tens.count
           %td= e.fives.count
           %td= e.ones.count
+      %tfoot
+        %tr.totals
+          - total_current = Envelope.sum :current_amount
+          - total_additional = Envelope.sum :additional_amount
+          - total_new = total_current + total_additional
+          %td
+          %td
+          %td Totals:
+          %td 
+          %td= "$#{total_current}"
+          %td= "$#{total_additional}"
+          %td= "$#{total_new}"
+          %td
+          %td= Twenty.count
+          %td= Ten.count
+          %td= Five.count
+          %td= One.count
