@@ -5,6 +5,7 @@
     %thead
       %tr
         %th 
+        %th
         %th Category
         %th Name
         %th Current Amount
@@ -19,6 +20,9 @@
     %tbody
       - envelopes.each do |e|
         %tr
+          %td
+            = link_to envelope_path(e), remote: true, method: :delete, data: {confirm: "Do you really want to delete your '#{e.name}' envelope?"} do
+              %i.icon-remove
           %td
             = link_to edit_envelope_path(e), remote: true do
               %i.icon-edit

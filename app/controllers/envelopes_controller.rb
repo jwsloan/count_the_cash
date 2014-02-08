@@ -28,6 +28,12 @@ class EnvelopesController < ApplicationController
     render :hide_form
   end
 
+  def destroy
+    @envelope = Envelope.find(params[:id])
+    @envelope.destroy
+    @envelopes = Envelope.all
+  end
+
   private
   def envelope_params
     params.require(:envelope).permit(:category, :name, :current_amount, :additional_amount)
