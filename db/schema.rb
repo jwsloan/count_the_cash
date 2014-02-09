@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205030249) do
+ActiveRecord::Schema.define(version: 20140208191024) do
 
   create_table "budgets", force: true do |t|
     t.date     "date"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140205030249) do
   create_table "envelopes", force: true do |t|
     t.string   "name"
     t.string   "category"
-    t.integer  "current_amount"
-    t.integer  "additional_amount"
+    t.integer  "current_amount",    default: 0
+    t.integer  "additional_amount", default: 0
     t.integer  "new_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
