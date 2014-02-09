@@ -1,3 +1,5 @@
-#envelope-list.container
-  = render partial: 'envelopes/envelope_list', locals: { envelopes: @envelopes }
+.container.panel.panel-primary
+  %h3.panel-heading Envelopes
+  #envelope-list
+    = render partial: 'envelopes/envelope_list', locals: { envelopes: @envelopes }
 #modal.modal.fade

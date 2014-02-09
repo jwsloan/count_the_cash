@@ -1,3 +1,21 @@
 // Place all the styles related to the Envelopes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+span.error {
+  color: #ac1414;
+  margin-left: 5px;
+} 
+
+tr.totals, td.totals {
+  font-weight: bold;
+} 
+
+td.denominations, th.denominations {
+  background-color: #eee;
+  text-align: right;
+}
+
+td.money, th.money {
+  text-align: right;
+}
+
