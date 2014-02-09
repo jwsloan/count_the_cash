@@ -5,23 +5,26 @@
 #. The value can just be part of the class. 
 class Denomination < ActiveRecord::Base
   belongs_to :envelope
-  self.inheritance_column = :value
+  self.inheritance_column = :singular_name
 
-  scope :ones, -> { where :value => 1 }
-  scope :fives, -> { where :value => 5 }
-  scope :tens, -> { where :value => 10 }
-  scope :twenties, -> { where :value => 20 }
-  scope :fifties, -> { where :value => 50 }
+  scope :ones, -> { where :singular_name => "One" }
+  scope :fives, -> { where :singular_name => "Five" }
+  scope :tens, -> { where :singular_name => "Ten" }
+  scope :twenties, -> { where :singular_name => "Twenty" }
+  scope :fifties, -> { where :singular_name => "Fifty" }
 
   def plural_name
-    "#{singular_name}s"
+    if singular_name.last == "y"
+      "#{singular_name[0...-1]}ies"
+    else
+      "#{singular_name}s"
+    end
   end
 
-  before_save :default
+  after_initialize :default
 
-  def default;  end
-
-  def singular_name; 
-    self.class.to_s.capitalize
+  def default; 
+    self.singular_name = self.class.to_s.capitalize
   end
 end
+
