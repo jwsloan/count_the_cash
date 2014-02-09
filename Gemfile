@@ -12,6 +12,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '2.13.1'
   gem 'rubocop'
+  gem 'haml-lint'
 end
 
 # from arubystory.blogspot.com
