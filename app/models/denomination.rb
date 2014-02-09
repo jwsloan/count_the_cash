@@ -7,11 +7,10 @@ class Denomination < ActiveRecord::Base
   belongs_to :envelope
   self.inheritance_column = :singular_name
 
-  scope :ones, -> { where :singular_name => "One" }
-  scope :fives, -> { where :singular_name => "Five" }
-  scope :tens, -> { where :singular_name => "Ten" }
-  scope :twenties, -> { where :singular_name => "Twenty" }
-  scope :fifties, -> { where :singular_name => "Fifty" }
+  scope :ones, -> { where(singular_name: 'One') }
+  scope :fives, -> { where(singular_name: 'Five') }
+  scope :tens, -> { where(singular_name: 'Ten') }
+  scope :twenties, -> { where(singular_name: 'Twenty') }
 
   def plural_name
     if singular_name.last == "y"
@@ -21,10 +20,8 @@ class Denomination < ActiveRecord::Base
     end
   end
 
-  after_initialize :default
+  before_save :default
 
-  def default; 
-    self.singular_name = self.class.to_s.capitalize
-  end
+  def default;  end
 end
 

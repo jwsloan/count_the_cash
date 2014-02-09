@@ -3,7 +3,6 @@
 class Twenty < Denomination
   def default
     self.value = 20
-    super
   end
 end
 

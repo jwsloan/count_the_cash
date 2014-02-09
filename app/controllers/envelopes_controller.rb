@@ -51,12 +51,12 @@ class EnvelopesController < ApplicationController
 
   def determine_denominations
     # TODO: Do math do figure out denominations
-    reset_denominations
     remaining = @envelope.additional_amount
+    reset_denominations
     while remaining > 0 do
       if remaining >= 20
         remaining -= 20
-        @envelope.twenties.first.count_in_envelope += 1 
+        @envelope.twenties.first.count_in_envelope += 1
       elsif remaining >= 10
         remaining -= 10
         @envelope.tens.first.count_in_envelope += 1
@@ -70,9 +70,14 @@ class EnvelopesController < ApplicationController
     end
     @envelope.save
   end
-  
+
   def reset_denominations
     @envelope.denominations.destroy_all
-    @envelope.denominations << One.create, Five.create, Ten.create, Twenty.create
+   # @envelope.denominations= [One.create, Five.create, Ten.create, Twenty.create]
+    
+    @envelope.denominations << One.create
+    @envelope.denominations << Five.create
+    @envelope.denominations << Ten.create
+    @envelope.denominations << Twenty.create
   end
 end
