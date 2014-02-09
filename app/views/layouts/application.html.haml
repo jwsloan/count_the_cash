@@ -5,14 +5,14 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags 
-%body
-  .row-fluid
-    .span10.offset1
-      .hero-unit.text-center
-        %h1
-          Count The Cash!
-        %p
-          Envelope stuffing app
-        = link_to 'New Envelope', new_envelope_path, class: 'btn btn-primary', remote: true
-  = yield 
+  %body
+    .row-fluid
+      .span10.offset1
+        .hero-unit.text-center
+          %h1
+            Count the Cash!
+          %p
+            Envelope stuffing app
+          = link_to 'New Envelope', new_envelope_path, class: 'btn btn-primary', remote: true
+    = yield 
 
