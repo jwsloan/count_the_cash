@@ -1,55 +1,52 @@
 - if envelopes.empty?
   %span.text-warning Start by creating your first envelope!
 - else
-  %table.table.table-hover-table-bordered
+  %table.table.table-bordered.table-hover
     %thead
       %tr
         %th 
         %th
         %th Category
         %th Name
-        %th Current Amount
-        %th Additional Amount
-        %th New Total
+        %th.money Current
+        %th.money Additional
         -#TODO: Maybe use different table? Use children of denominations as header
-        %th ---------
-        %th Twenties
-        %th Tens
-        %th Fives
-        %th Ones
+        %th.denominations Twenties
+        %th.denominations Tens
+        %th.denominations Fives
+        %th.denominations Ones
+        %th.totals.money New Total
     %tbody
       - envelopes.each do |e|
         %tr
           %td
-            = link_to envelope_path(e), remote: true, method: :delete, data: {confirm: "Do you really want to delete your '#{e.name}' envelope?"} do
+            = link_to envelope_path(e), remote: true, method: :delete,  data: {confirm: "Do you really want to delete your '#{e.name}' envelope?"} do
               %i.icon-remove
           %td
             = link_to edit_envelope_path(e), remote: true do
               %i.icon-edit
           %td= e.category
           %td= e.name
-          %td= "$#{e.current_amount}"
-          %td= "$#{e.additional_amount}"
-          %td= "$#{e.current_amount + e.additional_amount}"
-          %td= '|'
-          %td= e.twenties.count
-          %td= e.tens.count
-          %td= e.fives.count
-          %td= e.ones.count
+          %td.money= "$#{e.current_amount}"
+          %td.money= "$#{e.additional_amount}"
+          %td.denominations= e.twenties.count
+          %td.denominations= e.tens.count
+          %td.denominations= e.fives.count
+          %td.denominations= e.ones.count
+          %td.totals.money= "$#{e.current_amount + e.additional_amount}"
       %tfoot
         %tr.totals
           - total_current = Envelope.sum :current_amount
-          - total_additional = Envelope.sum :additional_amount
+          -total_additional = Envelope.sum :additional_amount
           - total_new = total_current + total_additional
           %td
           %td
           %td Totals:
-          %td 
-          %td= "$#{total_current}"
-          %td= "$#{total_additional}"
-          %td= "$#{total_new}"
           %td
-          %td= Twenty.count
-          %td= Ten.count
-          %td= Five.count
-          %td= One.count
+          %td.money= "$#{total_current}"
+          %td.money= "$#{total_additional}"
+          %td.denominations.money= "$#{Twenty.sum :value}"
+          %td.denominations.money= "$#{Ten.sum :value}"
+          %td.denominations.money= "$#{Five.sum :value}"
+          %td.denominations.money= "$#{One.sum :value}"
+          %td.totals.money= "$#{total_new}"

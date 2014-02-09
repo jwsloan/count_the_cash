@@ -6,7 +6,16 @@ span.error {
   margin-left: 5px;
 } 
 
-tr.totals {
+tr.totals, td.totals {
   font-weight: bold;
+} 
+
+td.denominations, th.denominations {
+  background-color: #eee;
+  text-align: right;
+}
+
+td.money, th.money {
+  text-align: right;
 }
 
