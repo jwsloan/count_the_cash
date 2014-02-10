@@ -18,6 +18,10 @@
         %th.totals.money New Total
     %tbody
       - envelopes.each do |e|
+        - twenty = Twenty.find_by(:envelope_id => e.id)
+        - ten = Ten.find_by(:envelope_id => e.id)
+        - five = Five.find_by(:envelope_id => e.id)
+        - one = One.find_by(:envelope_id => e.id)
         %tr
           %td
             = link_to envelope_path(e), remote: true,
@@ -31,10 +35,10 @@
           %td= e.name
           %td.money= "$#{e.current_amount}"
           %td.money= "$#{e.additional_amount}"
-          %td.denominations= e.twenties.count
-          %td.denominations= e.tens.count
-          %td.denominations= e.fives.count
-          %td.denominations= e.ones.count
+          %td.denominations= twenty.nil? ? 0 : twenty.count_in_envelope
+          %td.denominations= ten.nil? ? 0 : ten.count_in_envelope
+          %td.denominations= five.nil? ? 0 : five.count_in_envelope
+          %td.denominations= one.nil? ? 0 : one.count_in_envelope
           %td.totals.money= "$#{e.current_amount + e.additional_amount}"
       %tfoot
         %tr.totals
@@ -47,8 +51,9 @@
           %td
           %td.money= "$#{total_current}"
           %td.money= "$#{total_additional}"
-          %td.denominations.money= "$#{Twenty.sum :value}"
+          %td.denominations.money= "$#{Twenty.sum :count_in_envelope}"
           %td.denominations.money= "$#{Ten.sum :value}"
           %td.denominations.money= "$#{Five.sum :value}"
           %td.denominations.money= "$#{One.sum :value}"
           %td.totals.money= "$#{total_new}"
+          

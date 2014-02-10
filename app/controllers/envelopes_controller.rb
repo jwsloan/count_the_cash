@@ -23,6 +23,7 @@ class EnvelopesController < ApplicationController
 
   def create
     @envelope = Envelope.create(envelope_params)
+    init_denominations!
     validate_envelope
   end
 
@@ -32,12 +33,12 @@ class EnvelopesController < ApplicationController
     @envelopes = Envelope.all
   end
 
-  private
+  #private
 
   def validate_envelope
     if @envelope.valid?
       @envelopes = Envelope.all
-      determine_denominations
+      determine_denominations!
       render :hide_form
     else
       render :show_form
@@ -49,32 +50,44 @@ class EnvelopesController < ApplicationController
       .permit(:category, :name, :current_amount, :additional_amount)
   end
 
-  def determine_denominations
+  def determine_denominations!
     # TODO: Do math do figure out denominations
-    remaining = @envelope.additional_amount
-    reset_denominations
-    while remaining > 0 do
-      if remaining >= 20
-        remaining -= 20
-        @envelope.twenties.first.count_in_envelope += 1
-      elsif remaining >= 10
-        remaining -= 10
-        @envelope.tens.first.count_in_envelope += 1
-      elsif remaining >= 5
-        remaining -= 5
-        @envelope.fives.first.count_in_envelope += 1
-      else
-        remaining -= 1
-        @envelope.ones.first.count_in_envelope += 1
-      end
-    end
+    @remaining = @envelope.additional_amount
+    #while @remaining > 0 do
+     # if @remaining >= 20
+     #   num = @remaining / 20
+     #   @remaining -= 20 * num
+     #   t = Twenty.find_by(:envelope_id => @envelope.id)
+     #   t.count_in_envelope = num
+     #   t.save
+      fill_denomination 20
+      puts ">>>>>>>>>>remaining: #{@remaining}"
+      fill_denomination 10
+      puts ">>>>>>>>>>remaining: #{@remaining}"
+      fill_denomination 5
+      puts ">>>>>>>>>>remaining: #{@remaining}"
+      fill_denomination 1
+      puts ">>>>>>>>>>remaining: #{@remaining}"
+    #end
     @envelope.save
   end
+  
+  def fill_denomination(value)
+    if @remaining >= value
+      t = case value
+          when 20 then Twenty.find_by(:envelope_id => @envelope.id)
+          when 10 then Ten.find_by(:envelope_id => @envelope.id)
+          when 5 then Five.find_by(:envelope_id => @envelope.id)
+          when 1 then One.find_by(:envelope_id => @envelope.id)
+          end
+      count = @remaining / value
+      t.count_in_envelope = count
+      t.save
+      @remaining -= value * count
+    end
+  end
 
-  def reset_denominations
-    @envelope.denominations.destroy_all
-   # @envelope.denominations= [One.create, Five.create, Ten.create, Twenty.create]
-    
+  def init_denominations!
     @envelope.denominations << One.create
     @envelope.denominations << Five.create
     @envelope.denominations << Ten.create
