@@ -23,7 +23,6 @@ class EnvelopesController < ApplicationController
 
   def create
     @envelope = Envelope.create(envelope_params)
-    init_denominations!
     validate_envelope
   end
 
@@ -33,7 +32,7 @@ class EnvelopesController < ApplicationController
     @envelopes = Envelope.all
   end
 
-  #private
+  private
 
   def validate_envelope
     if @envelope.valid?
@@ -51,46 +50,21 @@ class EnvelopesController < ApplicationController
   end
 
   def determine_denominations!
-    # TODO: Do math do figure out denominations
     @remaining = @envelope.additional_amount
-    #while @remaining > 0 do
-     # if @remaining >= 20
-     #   num = @remaining / 20
-     #   @remaining -= 20 * num
-     #   t = Twenty.find_by(:envelope_id => @envelope.id)
-     #   t.count_in_envelope = num
-     #   t.save
-      fill_denomination 20
-      puts ">>>>>>>>>>remaining: #{@remaining}"
-      fill_denomination 10
-      puts ">>>>>>>>>>remaining: #{@remaining}"
-      fill_denomination 5
-      puts ">>>>>>>>>>remaining: #{@remaining}"
-      fill_denomination 1
-      puts ">>>>>>>>>>remaining: #{@remaining}"
-    #end
-    @envelope.save
-  end
-  
-  def fill_denomination(value)
-    if @remaining >= value
+
+    [20, 10, 5, 1].each do |value|
       t = case value
-          when 20 then Twenty.find_by(:envelope_id => @envelope.id)
-          when 10 then Ten.find_by(:envelope_id => @envelope.id)
-          when 5 then Five.find_by(:envelope_id => @envelope.id)
-          when 1 then One.find_by(:envelope_id => @envelope.id)
+          when 20 then Twenty.find_or_create_by(:envelope_id => @envelope.id)
+          when 10 then Ten.find_or_create_by(:envelope_id => @envelope.id)
+          when 5 then Five.find_or_create_by(:envelope_id => @envelope.id)
+          when 1 then One.find_or_create_by(:envelope_id => @envelope.id)
           end
       count = @remaining / value
       t.count_in_envelope = count
       t.save
       @remaining -= value * count
     end
-  end
-
-  def init_denominations!
-    @envelope.denominations << One.create
-    @envelope.denominations << Five.create
-    @envelope.denominations << Ten.create
-    @envelope.denominations << Twenty.create
+    @envelope.save
   end
 end
+

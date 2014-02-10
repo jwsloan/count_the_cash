@@ -4,7 +4,7 @@
   %table.table.table-bordered.table-hover
     %thead
       %tr
-        %th 
+        %th
         %th
         %th Category
         %th Name
@@ -18,42 +18,46 @@
         %th.totals.money New Total
     %tbody
       - envelopes.each do |e|
-        - twenty = Twenty.find_by(:envelope_id => e.id)
-        - ten = Ten.find_by(:envelope_id => e.id)
-        - five = Five.find_by(:envelope_id => e.id)
-        - one = One.find_by(:envelope_id => e.id)
+        - twenty = Twenty.find_by :envelope_id => e.id
+        - ten = Ten.find_by :envelope_id => e.id
+        - five = Five.find_by :envelope_id => e.id
+        - one = One.find_by :envelope_id => e.id
         %tr
           %td
             = link_to envelope_path(e), remote: true,
                                         method: :delete,
-                                        data: { confirm: "Do you really want to delete your '#{e.name}' envelope?" } do
+                                        data: { confirm: "Do you really want to delete your '#{ e.name }' envelope?" } do
               %i.icon-remove
           %td
             = link_to edit_envelope_path(e), remote: true do
               %i.icon-edit
           %td= e.category
           %td= e.name
-          %td.money= "$#{e.current_amount}"
-          %td.money= "$#{e.additional_amount}"
+          %td.money= "$#{ e.current_amount }"
+          %td.money= "$#{ e.additional_amount }"
           %td.denominations= twenty.nil? ? 0 : twenty.count_in_envelope
           %td.denominations= ten.nil? ? 0 : ten.count_in_envelope
           %td.denominations= five.nil? ? 0 : five.count_in_envelope
           %td.denominations= one.nil? ? 0 : one.count_in_envelope
-          %td.totals.money= "$#{e.current_amount + e.additional_amount}"
+          %td.totals.money= "$#{ e.current_amount + e.additional_amount }"
       %tfoot
         %tr.totals
           - total_current = Envelope.sum :current_amount
           - total_additional = Envelope.sum :additional_amount
           - total_new = total_current + total_additional
+          - twenties_count = Twenty.sum :count_in_envelope
+          - tens_count = Ten.sum :count_in_envelope
+          - fives_count = Five.sum :count_in_envelope
+          - ones_count = One.sum :count_in_envelope
           %td
           %td
           %td Totals:
           %td
-          %td.money= "$#{total_current}"
-          %td.money= "$#{total_additional}"
-          %td.denominations.money= "$#{Twenty.sum :count_in_envelope}"
-          %td.denominations.money= "$#{Ten.sum :value}"
-          %td.denominations.money= "$#{Five.sum :value}"
-          %td.denominations.money= "$#{One.sum :value}"
-          %td.totals.money= "$#{total_new}"
-          
+          %td.money= "$#{ total_current }"
+          %td.money= "$#{ total_additional }"
+          %td.denominations.money= "$#{ twenties_count * 20 }"
+          %td.denominations.money= "$#{ tens_count * 10 }"
+          %td.denominations.money= "$#{ fives_count * 5 }"
+          %td.denominations.money= "$#{ ones_count }"
+          %td.totals.money= "$#{ total_new }"
+
