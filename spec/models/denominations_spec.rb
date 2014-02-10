@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Denomination Model" do
+describe Denomination do
   describe "singular_name capitalizes class name" do
     subject { [One.new, Five.new, Ten.new, Twenty.new] }
     it "should have correct singular_name" do
