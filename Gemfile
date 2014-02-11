@@ -19,6 +19,8 @@ end
 gem 'haml'
 gem 'simple_form'
 
+gem 'haml-rails'
+
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'

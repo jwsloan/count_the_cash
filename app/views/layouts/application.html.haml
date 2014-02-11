@@ -2,8 +2,8 @@
 %html
   %head
     %title Count the Cash!
-    = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
     = csrf_meta_tags 
   %body
     .row-fluid
@@ -13,6 +13,7 @@
             Count the Cash!
           %p
             Envelope stuffing app
-          = link_to 'New Envelope', new_envelope_path, class: 'btn btn-primary', remote: true
+          = link_to "New Envelope", new_envelope_path, class: "btn btn-primary", remote: true
+          = link_to "Sign up now!", signup_path, class: "btn btn-primary"
     = yield 
 
