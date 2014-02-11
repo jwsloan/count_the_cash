@@ -40,24 +40,24 @@
           %td.denominations= five.nil? ? 0 : five.count_in_envelope
           %td.denominations= one.nil? ? 0 : one.count_in_envelope
           %td.totals.money= "$#{ e.current_amount + e.additional_amount }"
-      %tfoot
-        %tr.totals
-          - total_current = Envelope.sum :current_amount
-          - total_additional = Envelope.sum :additional_amount
-          - total_new = total_current + total_additional
-          - twenties_count = Twenty.sum :count_in_envelope
-          - tens_count = Ten.sum :count_in_envelope
-          - fives_count = Five.sum :count_in_envelope
-          - ones_count = One.sum :count_in_envelope
-          %td
-          %td
-          %td Totals:
-          %td
-          %td.money= "$#{ total_current }"
-          %td.money= "$#{ total_additional }"
-          %td.denominations.money= "$#{ twenties_count * 20 }"
-          %td.denominations.money= "$#{ tens_count * 10 }"
-          %td.denominations.money= "$#{ fives_count * 5 }"
-          %td.denominations.money= "$#{ ones_count }"
-          %td.totals.money= "$#{ total_new }"
+    %tfoot
+      %tr.totals
+        - total_current = Envelope.sum :current_amount
+        - total_additional = Envelope.sum :additional_amount
+        - total_new = total_current + total_additional
+        - twenties_count = Twenty.sum :count_in_envelope
+        - tens_count = Ten.sum :count_in_envelope
+        - fives_count = Five.sum :count_in_envelope
+        - ones_count = One.sum :count_in_envelope
+        %td
+        %td
+        %td Totals:
+        %td
+        %td.money= "$#{ total_current }"
+        %td.money= "$#{ total_additional }"
+        %td.denominations.money= "$#{ twenties_count * 20 }"
+        %td.denominations.money= "$#{ tens_count * 10 }"
+        %td.denominations.money= "$#{ fives_count * 5 }"
+        %td.denominations.money= "$#{ ones_count }"
+        %td.totals.money= "$#{ total_new }"
 
