@@ -9,5 +9,6 @@ Bundler.require(:default, Rails.env)
 module CountTheCash
   class Application < Rails::Application
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    I18n.enforce_available_locales = true
   end
 end
