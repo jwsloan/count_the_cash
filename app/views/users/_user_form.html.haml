@@ -1,0 +1,11 @@
+- user = @user
+%h1 
+  = user.new_record? ? "New User" : "Edit '#{user.name}'"
+.row
+  .span6.offset3
+    = simple_form_for user, class: 'clearfix', remote: true do |f|
+      = f.input :name
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+      = f.submit 'Save', class: 'btn btn-primary'
