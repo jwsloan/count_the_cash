@@ -24,9 +24,10 @@
         - one = One.find_by :envelope_id => e.id
         %tr
           %td
+            - delete_message = "Do you really want to delete your '#{ e.name }' envelope?"
             = link_to envelope_path(e), remote: true,
                                         method: :delete,
-                                        data: { confirm: "Do you really want to delete your '#{ e.name }' envelope?" } do
+                                        data: { confirm: delete_message } do
               %i.icon-remove
           %td
             = link_to edit_envelope_path(e), remote: true do

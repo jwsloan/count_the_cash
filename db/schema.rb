@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212212039) do
-
-  create_table "budgets", force: true do |t|
-    t.date     "date"
-    t.integer  "starting_amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "budgets", ["user_id"], name: "index_budgets_on_user_id"
+ActiveRecord::Schema.define(version: 20140212215121) do
 
   create_table "denominations", force: true do |t|
     t.integer  "value"
@@ -42,10 +32,10 @@ ActiveRecord::Schema.define(version: 20140212212039) do
     t.integer  "new_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "budget_id"
+    t.integer  "user_id"
   end
 
-  add_index "envelopes", ["budget_id"], name: "index_envelopes_on_budget_id"
+  add_index "envelopes", ["user_id"], name: "index_envelopes_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

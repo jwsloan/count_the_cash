@@ -12,7 +12,7 @@ class Envelope < ActiveRecord::Base
 
   before_save :defaults
   has_many :denominations, dependent: :destroy
-  belongs_to :budget
+  belongs_to :user
 
   delegate :ones, :fives, :tens, :twenties, to: :denominations
 
