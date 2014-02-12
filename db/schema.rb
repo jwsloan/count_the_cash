@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212171856) do
+ActiveRecord::Schema.define(version: 20140212212039) do
 
   create_table "budgets", force: true do |t|
     t.date     "date"
     t.integer  "starting_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "budgets", ["user_id"], name: "index_budgets_on_user_id"
 
   create_table "denominations", force: true do |t|
     t.integer  "value"
