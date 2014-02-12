@@ -1,7 +1,11 @@
 .modal-header
 %h1 Sign In
-= simple_form_for :session, :class => "clearfix", :url => sessions_path do |f| 
+= simple_form_for :session,
+                  :class => "clearfix",
+                  :url => sessions_path,
+                  :remote => true do |f| 
   .modal-body
+    %span.error= @error_message
     = f.input :email
     = f.input :password
   .modal-footer
