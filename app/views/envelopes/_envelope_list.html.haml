@@ -1,5 +1,8 @@
-- if envelopes.empty?
-  %span.text-warning Start by creating your first envelope!
+- if envelopes.nil? || envelopes.empty?
+  - if signed_in?
+    %span.text-warning= "Hello, #{current_user.name}. Use the link above to create your first envelope!"
+  - else
+    %span.text-warning Please use the link above to sign-in/sign-up.
 - else
   %table.table.table-bordered.table-hover
     %thead

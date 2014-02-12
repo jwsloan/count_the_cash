@@ -12,12 +12,12 @@
           #logo.pull-left Count the Cash!
           .nav
             %ul.nav.pull-right
+            - if !signed_in?
+              %li= link_to "Sign in", new_session_path, :remote => true
+            - else
               %li= link_to "New Envelope", new_envelope_path, :remote =>  true
-              - if !signed_in?
-                %li= link_to "Sign in", new_session_path, :remote => true
-              - else
-                %li= link_to "Sign out", signout_path,
-                    :remote => true, :method => "delete"
+              %li= link_to "Sign out", signout_path,
+                  :remote => true, :method => "delete"
     .container
       = yield 
       = debug(params) if Rails.env.development?

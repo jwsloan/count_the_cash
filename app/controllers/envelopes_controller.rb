@@ -2,7 +2,11 @@
 # Holds cash denominations per budget category
 class EnvelopesController < ApplicationController
   def show
-    @envelopes = Envelope.all
+    if signed_in?
+      @envelopes = Envelope.where(:user_id => current_user.id)
+    else
+      @envelopes = [] 
+    end
   end
 
   def new
@@ -29,15 +33,16 @@ class EnvelopesController < ApplicationController
   def destroy
     @envelope = Envelope.find(params[:id])
     @envelope.destroy
-    @envelopes = Envelope.all
+    @envelopes = Envelope.where(:user_id => current_user.id)
   end
 
   private
 
   def validate_envelope
     if @envelope.valid?
-      @envelopes = Envelope.all
+      @envelope.update_attribute(:user_id, current_user.id)
       determine_denominations!
+      @envelopes = Envelope.where(:user_id => current_user.id)
       render :hide_form
     else
       render :show_form
