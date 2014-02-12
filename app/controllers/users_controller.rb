@@ -29,10 +29,10 @@ class UsersController < ApplicationController
       if @user.valid?
         @users = User.all
         @user.save
-        #render :hide_form
-        redirect_to new_session_path
+        sign_in @user
+        render :hide_form
+        #redirect_to new_session_path
       else 
-        puts @user.errors.full_messages
         render :show_form
       end
     end

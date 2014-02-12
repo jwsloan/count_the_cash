@@ -3,4 +3,5 @@ CountTheCash::Application.routes.draw do
   resources :envelopes, except: [:index]
   resources :users, except: [:index]
   resources :sessions, only: [:new, :create, :destroy]
+  match '/signout', to: "sessions#destroy", via: "delete"
 end

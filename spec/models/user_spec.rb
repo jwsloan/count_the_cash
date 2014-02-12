@@ -11,7 +11,7 @@ describe User do
 
   describe "when a message is recieved" do
     messages = [:name, :email, :password_digest, :password,
-                :password_confirmation, :authenticate]
+                :password_confirmation, :authenticate, :remember_token]
     messages.each { |message| it { should respond_to message } }
   end
 
