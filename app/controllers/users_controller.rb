@@ -31,7 +31,6 @@ class UsersController < ApplicationController
         @user.save
         sign_in @user
         render :hide_form
-        #redirect_to new_session_path
       else 
         render :show_form
       end
