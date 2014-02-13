@@ -74,8 +74,10 @@ class EnvelopesController < ApplicationController
   end
 
   def validate_no_duplicates_per_user
-    puts "VALIDATE NO DUPS"
-    if Envelope.exists?(:user_id => current_user.id, :name => @envelope.name)
+    if @envelope.new_record? && 
+       Envelope.exists?(:user_id => current_user.id, 
+                        :name => @envelope.name) then
+
       @envelope.errors[:name] << "You already have an envelope by that name."
       false
     else
