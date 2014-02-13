@@ -1,4 +1,5 @@
 # @author John Sloan
+# This is adapted from http://ruby.railstutorial.org
 class SessionsController < ApplicationController
   def create
     user = User.find_by(:email => params[:session][:email].downcase)
@@ -6,6 +7,7 @@ class SessionsController < ApplicationController
       sign_in user
       render :hide_form
     else
+      # The view will use this to display the error.
       @error_message = "Username or Password invalid."
       render :new
     end

@@ -1,4 +1,5 @@
 # @author John Sloan
+# Adapted from http://ruby.railstutorial.org
 module SessionsHelper
   attr_writer :current_user
   def sign_in(user)

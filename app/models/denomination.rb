@@ -7,20 +7,19 @@ class Denomination < ActiveRecord::Base
   belongs_to :envelope
   self.inheritance_column = :singular_name
 
+  # These scpopes are plurally named, but grab one object on purpose.
+  # This allows user such as envelope.ones.count_in_envelope. That reads
+  # better than envelope.one.count_in_envelope.
   scope :ones, -> { find_by(:singular_name => "One") }
   scope :fives, -> { find_by(:singular_name => "Five") }
   scope :tens, -> { find_by(:singular_name => "Ten") }
   scope :twenties, -> { find_by(:singular_name => "Twenty") }
 
-  def plural_name
-    if singular_name.last == "y"
-      "#{singular_name[0...-1]}ies"
-    else
-      "#{singular_name}s"
-    end
-  end
-
   before_save :default
 
   def default;  end
+
+  def self.available_values
+    [20, 10, 5, 1]
+  end
 end

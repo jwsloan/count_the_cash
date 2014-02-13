@@ -4,6 +4,7 @@
   - else
     %span.text-warning Please use the link above to sign-in/sign-up.
 - else
+  - # Total count of each denomination in all envelopes for this user
   - total_twenties = 0
   - total_tens = 0
   - total_fives = 0
@@ -17,7 +18,7 @@
         %th Name
         %th.money Current
         %th.money Additional
-        -#TODO: Use children of denominations as header?
+        -#TODO: Would like to pull in subclasses of Denomination
         %th.denominations Twenties
         %th.denominations Tens
         %th.denominations Fives
@@ -26,6 +27,7 @@
     %tbody
       - envelopes.each do |e|
         %tr
+          - # Incriment denominations totals for by count in this envelope.
           - total_twenties += e.twenties.count_in_envelope
           - total_tens += e.tens.count_in_envelope
           - total_fives += e.fives.count_in_envelope
@@ -43,6 +45,7 @@
           %td= e.name
           %td.money= "$#{ e.current_amount }"
           %td.money= "$#{ e.additional_amount }"
+          -#TODO: Would like to pull in subclasses of Denomination
           %td.denominations= e.twenties.count_in_envelope
           %td.denominations= e.tens.count_in_envelope
           %td.denominations= e.fives.count_in_envelope
@@ -59,6 +62,7 @@
         %td Totals:
         %td.money= "$#{ total_current }"
         %td.money= "$#{ total_additional }"
+        -#TODO: Would like to pull in subclasses of Denomination
         %td.denominations.money= "$#{ total_twenties * 20 }"
         %td.denominations.money= "$#{ total_tens * 10 }"
         %td.denominations.money= "$#{ total_fives * 5 }"

@@ -1,4 +1,5 @@
 # @author John Sloan
+# This is adapted from http://ruby.railstutorial.org
 class UsersController < ApplicationController
   def show
     @user = User.find_by(params[:email])
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
       .permit(:name, :email, :password, :password_confirmation)
   end
 
+  # If the user is valid, save it and sign the user in automatically.
   def validate_user
     if @user.valid?
       @users = User.all
