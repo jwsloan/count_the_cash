@@ -2,10 +2,7 @@
 # Represents a physical envelope for cash budgeting.
 class Envelope < ActiveRecord::Base
   validates_presence_of :category, :name, :current_amount, :additional_amount
-
-  validates :name, uniqueness: {
-            message: 'An envelope by that name already exists.' }
-
+  validates_length_of :name, :maximum => 25
   validates :current_amount, :additional_amount,
             numericality: { only_integer: true, greater_than_or_equal_to: 0,
                             message: 'Whole dollar amounts only.' }

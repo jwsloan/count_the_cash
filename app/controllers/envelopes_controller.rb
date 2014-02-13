@@ -26,7 +26,7 @@ class EnvelopesController < ApplicationController
   end
 
   def create
-    @envelope = Envelope.create(envelope_params)
+    @envelope = Envelope.new(envelope_params)
     validate_envelope
   end
 
@@ -39,7 +39,8 @@ class EnvelopesController < ApplicationController
   private
 
   def validate_envelope
-    if @envelope.valid?
+    
+    if validate_no_duplicates_per_user && @envelope.valid?
       @envelope.update_attribute(:user_id, current_user.id)
       determine_denominations!
       @envelopes = Envelope.where(:user_id => current_user.id)
@@ -70,6 +71,16 @@ class EnvelopesController < ApplicationController
       @remaining -= value * count
     end
     @envelope.save
+  end
+
+  def validate_no_duplicates_per_user
+    puts "VALIDATE NO DUPS"
+    if Envelope.exists?(:user_id => current_user.id, :name => @envelope.name)
+      @envelope.errors[:name] << "You already have an envelope by that name."
+      false
+    else
+      true
+    end
   end
 end
 
