@@ -4,6 +4,10 @@
   - else
     %span.text-warning Please use the link above to sign-in/sign-up.
 - else
+  - total_twenties = 0
+  - total_tens = 0
+  - total_fives = 0
+  - total_ones = 0
   %table.table.table-bordered.table-hover
     %thead
       %tr
@@ -26,6 +30,10 @@
         - five = Five.find_by :envelope_id => e.id
         - one = One.find_by :envelope_id => e.id
         %tr
+          - total_twenties += twenty.count_in_envelope
+          - total_tens += ten.count_in_envelope
+          - total_fives += five.count_in_envelope
+          - total_ones += one.count_in_envelope
           %td
             - delete_message = "Do you really want to delete your '#{ e.name }' envelope?"
             = link_to envelope_path(e), remote: true,
@@ -46,22 +54,18 @@
           %td.totals.money= "$#{ e.current_amount + e.additional_amount }"
     %tfoot
       %tr.totals
-        - total_current = Envelope.sum :current_amount
-        - total_additional = Envelope.sum :additional_amount
+        - total_current = Envelope.where(:user_id => current_user.id).sum :current_amount
+        - total_additional = Envelope.where(:user_id => current_user.id).sum :additional_amount
         - total_new = total_current + total_additional
-        - twenties_count = Twenty.sum :count_in_envelope
-        - tens_count = Ten.sum :count_in_envelope
-        - fives_count = Five.sum :count_in_envelope
-        - ones_count = One.sum :count_in_envelope
         %td
         %td
         %td Totals:
         %td
         %td.money= "$#{ total_current }"
         %td.money= "$#{ total_additional }"
-        %td.denominations.money= "$#{ twenties_count * 20 }"
-        %td.denominations.money= "$#{ tens_count * 10 }"
-        %td.denominations.money= "$#{ fives_count * 5 }"
-        %td.denominations.money= "$#{ ones_count }"
+        %td.denominations.money= "$#{ total_twenties * 20 }"
+        %td.denominations.money= "$#{ total_tens * 10 }"
+        %td.denominations.money= "$#{ total_fives * 5 }"
+        %td.denominations.money= "$#{ total_ones }"
         %td.totals.money= "$#{ total_new }"
 
