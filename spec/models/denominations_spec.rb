@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Denomination do
   describe "singular_name capitalizes class name" do
@@ -7,6 +7,4 @@ describe Denomination do
       subject.each { |s| s.singular_name.should == s.class.to_s.capitalize }
     end
   end
-
 end
-
