@@ -6,7 +6,7 @@
   .modal-body
     = f.input :category
     = f.input :name
-    = f.input :current_amount
-    = f.input :additional_amount
+    = f.input :current_amount, :label => "Current amount (without \"$\")"
+    = f.input :additional_amount, :label => "Additional amount (without \"$\")"
   .modal-footer
     = f.submit "Save", :class => "btn btn-primary"
