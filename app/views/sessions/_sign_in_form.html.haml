@@ -1,5 +1,5 @@
 .modal-header
-%h1 Sign In
+  %h1 Sign In
 = simple_form_for :session,
                   :class => "clearfix",
                   :url => sessions_path,
@@ -11,6 +11,6 @@
   .modal-footer
     = f.submit "Sign in", :class => "btn btn-large btn-primary"
 
-%p.pull-right 
-  New user? 
-  = link_to "Sign up now!", new_user_path, :remote => true
+    %h4.pull-left 
+      New user? 
+      = link_to "Sign up now!", new_user_path, :remote => true

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       sign_in user
       render :hide_form
     else
-      @error_message = "Username/password error."
+      @error_message = "Username or Password invalid."
       render :new
     end
   end
