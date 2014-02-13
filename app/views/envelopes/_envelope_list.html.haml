@@ -50,8 +50,8 @@
           %td.totals.money= "$#{ e.current_amount + e.additional_amount }"
     %tfoot
       %tr.totals
-        - total_current = Envelope.where(:user_id => current_user.id).sum :current_amount
-        - total_additional = Envelope.where(:user_id => current_user.id).sum :additional_amount
+        - total_current = current_user.envelopes.sum :current_amount
+        - total_additional = current_user.envelopes.sum :additional_amount
         - total_new = total_current + total_additional
         %td
         %td
