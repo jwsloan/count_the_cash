@@ -1,6 +1,6 @@
 # @author John Sloan
 # An Evelope represents a physical cash budgeting envelope.
-# This controller will determine the number required of each 
+# This controller will determine the number required of each
 # available denomination based on the amount being added to
 # that envelope. Additionally, it will ensure that each user
 # only sees the envelopes that user created.
@@ -86,7 +86,7 @@ class EnvelopesController < ApplicationController
       when 1 then One.find_or_create_by(:envelope_id => @envelope.id)
       end
     end
-    
+
     # It does not make sense to have two envelopes with the same name for
     # a single user. This will ensure that does not happen.
     def validate_no_duplicates_per_user

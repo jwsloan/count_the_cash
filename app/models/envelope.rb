@@ -7,7 +7,8 @@ class Envelope < ActiveRecord::Base
             :numericality => { :only_integer => true,
                                :greater_than_or_equal_to => 0,
                                :less_than_or_equal_to => 1000,
-                               :message => "Whole dollar amounts <= 1000 only." }
+                               :message => "Whole dollar amounts <= 1000 only."
+                             }
 
   before_save :defaults
   has_many :denominations, :dependent => :destroy
