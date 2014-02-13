@@ -1,11 +1,11 @@
 .modal-header
   %h1 
-    = envelope.new_record? ? 'New Envelope' : "Edit '#{envelope.name}'"
-= simple_form_for envelope, class: 'clearfix', remote: true do |f|
+    = envelope.new_record? ? "New Envelope" : "Edit '#{envelope.name}'"
+= simple_form_for envelope, :class => "clearfix", :remote => true do |f|
   .modal-body
     = f.input :category
     = f.input :name
     = f.input :current_amount
     = f.input :additional_amount
   .modal-footer
-    = f.submit 'Save', class: 'btn btn-primary'
+    = f.submit "Sav", :class => "btn btn-primary"

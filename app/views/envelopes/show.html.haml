@@ -1,5 +1,6 @@
 .container.panel.panel-primary
   %h3.panel-heading Envelopes
   #envelope-list
-    = render partial: 'envelopes/envelope_list', locals: { envelopes: @envelopes }
+    = render  :partial => "envelopes/envelope_list", 
+              :locals => { :envelopes => @envelopes }
 #modal.modal.fade

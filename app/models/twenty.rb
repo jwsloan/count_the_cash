@@ -5,4 +5,3 @@ class Twenty < Denomination
     self.value = 20
   end
 end
-

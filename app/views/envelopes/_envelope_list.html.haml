@@ -17,7 +17,7 @@
         %th Name
         %th.money Current
         %th.money Additional
-        -#TODO: Maybe use different table? Use children of denominations as header
+        -#TODO: Use children of denominations as header?
         %th.denominations Twenties
         %th.denominations Tens
         %th.denominations Fives
@@ -36,12 +36,12 @@
           - total_ones += one.count_in_envelope
           %td
             - delete_message = "Do you really want to delete your '#{ e.name }' envelope?"
-            = link_to envelope_path(e), remote: true,
-                                        method: :delete,
-                                        data: { confirm: delete_message } do
+            = link_to envelope_path(e), :remote => true,
+                                        :method => :delete,
+                                        :data => { :confirm => delete_message } do
               %i.icon-remove
           %td
-            = link_to edit_envelope_path(e), remote: true do
+            = link_to edit_envelope_path(e), :remote => true do
               %i.icon-edit
           %td= e.category
           %td= e.name
@@ -59,8 +59,8 @@
         - total_new = total_current + total_additional
         %td
         %td
-        %td Totals:
         %td
+        %td Totals:
         %td.money= "$#{ total_current }"
         %td.money= "$#{ total_additional }"
         %td.denominations.money= "$#{ total_twenties * 20 }"

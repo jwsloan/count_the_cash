@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+include SessionsHelper
 describe EnvelopesController do
   describe "a new envelope has the correct denominations" do
     before(:each) do

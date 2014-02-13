@@ -5,7 +5,7 @@ class EnvelopesController < ApplicationController
     if signed_in?
       @envelopes = Envelope.where(:user_id => current_user.id)
     else
-      @envelopes = [] 
+      @envelopes = []
     end
   end
 
@@ -39,7 +39,6 @@ class EnvelopesController < ApplicationController
   private
 
   def validate_envelope
-    
     if validate_no_duplicates_per_user && @envelope.valid?
       @envelope.update_attribute(:user_id, current_user.id)
       determine_denominations!
@@ -57,32 +56,36 @@ class EnvelopesController < ApplicationController
 
   def determine_denominations!
     @remaining = @envelope.additional_amount
-
     [20, 10, 5, 1].each do |value|
-      t = case value
-          when 20 then Twenty.find_or_create_by(:envelope_id => @envelope.id)
-          when 10 then Ten.find_or_create_by(:envelope_id => @envelope.id)
-          when 5 then Five.find_or_create_by(:envelope_id => @envelope.id)
-          when 1 then One.find_or_create_by(:envelope_id => @envelope.id)
-          end
+      denomination = choose_denomination value
       count = @remaining / value
-      t.count_in_envelope = count
-      t.save
+      denomination.count_in_envelope = count
+      denomination.save
       @remaining -= value * count
     end
     @envelope.save
   end
 
-  def validate_no_duplicates_per_user
-    if @envelope.new_record? && 
-       Envelope.exists?(:user_id => current_user.id, 
-                        :name => @envelope.name) then
+  def choose_denomination(value)
+    case value
+    when 20 then Twenty.find_or_create_by(:envelope_id => @envelope.id)
+    when 10 then Ten.find_or_create_by(:envelope_id => @envelope.id)
+    when 5 then Five.find_or_create_by(:envelope_id => @envelope.id)
+    when 1 then One.find_or_create_by(:envelope_id => @envelope.id)
+    end
+  end
 
+  def validate_no_duplicates_per_user
+    if @envelope.new_record? && envelope_name_taken?
       @envelope.errors[:name] << "You already have an envelope by that name."
       false
     else
       true
     end
   end
-end
 
+  def envelope_name_taken?
+    Envelope.exists?(:user_id => current_user.id,
+                     :name => @envelope.name)
+  end
+end

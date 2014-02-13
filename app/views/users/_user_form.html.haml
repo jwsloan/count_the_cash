@@ -1,11 +1,11 @@
 .modal-header
   %h1 
-    = user.new_record? ? 'New User' : "Edit '#{user.name}'"
-= simple_form_for user, class: 'clearfix', remote: true do |f|
+    = user.new_record? ? "New User" : "Edit '#{user.name}'"
+= simple_form_for user, :class => "clearfix", :remote => true do |f|
   .modal-body
     = f.input :name
     = f.input :email
     = f.input :password
     = f.input :password_confirmation
   .modal-footer
-    = f.submit 'Save', class: 'btn btn-primary'
+    = f.submit "Save", :class => "btn btn-primary"

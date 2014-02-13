@@ -1,3 +1,4 @@
+# @author John Sloan
 class UsersController < ApplicationController
   def show
     @user = User.find_by(params[:email])
@@ -20,19 +21,19 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params 
-      params.require(:user)
-        .permit(:name, :email, :password, :password_confirmation)
+  def user_params
+    params.require(:user)
+      .permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def validate_user
+    if @user.valid?
+      @users = User.all
+      @user.save
+      sign_in @user
+      render :hide_form
+    else
+      render :show_form
     end
-    
-    def validate_user
-      if @user.valid?
-        @users = User.all
-        @user.save
-        sign_in @user
-        render :hide_form
-      else 
-        render :show_form
-      end
-    end
+  end
 end

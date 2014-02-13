@@ -5,4 +5,3 @@ class Ten < Denomination
     self.value = 10
   end
 end
-

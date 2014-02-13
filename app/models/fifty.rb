@@ -6,4 +6,3 @@ class Fifty < Denomination
     super
   end
 end
-

@@ -5,4 +5,3 @@ class One < Denomination
     self.value = 1
   end
 end
-
