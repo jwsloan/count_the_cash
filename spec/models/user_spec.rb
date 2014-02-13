@@ -1,3 +1,4 @@
+# This is adapted from http://ruby.railstutorial.org
 require 'spec_helper'
 
 describe User do
