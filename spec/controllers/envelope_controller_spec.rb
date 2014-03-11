@@ -1,9 +1,12 @@
 require 'spec_helper'
-include SessionsHelper
 describe EnvelopesController do
+  include SessionsHelper
   describe "a new envelope has the correct denominations" do
     before(:each) do
-      @attr = { :name => "test", :category => "test", :additional_amount => 36 }
+      @attr = { :name => "test", 
+                :category => "test", 
+                :additional_amount => 36 
+              }
       post :create, :envelope => @attr, :format => "js"
     end
 
